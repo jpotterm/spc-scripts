@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cd /Volumes/HardDrive/libraries/go/src/bitbucket.org/geneticentropy
+zip mendel-go-spc.zip \
+    mendel-go-spc \
+    mendel-go-spc/*
+
+cd /Volumes/HardDrive/libraries/go/src/github.com/jpotterm/spc/
+
+./spc uninstall mendel_go
+./spc install /Volumes/HardDrive/libraries/go/src/bitbucket.org/geneticentropy/mendel-go-spc.zip
+
+rm /Volumes/HardDrive/libraries/go/src/bitbucket.org/geneticentropy/mendel-go-spc.zip
+
+ln -s /Volumes/HardDrive/libraries/go/src/bitbucket.org/geneticentropy/mendel-go/mendel-go ./src/spc_apps/mendel_go/mendel_go
+ln -s /Volumes/HardDrive/libraries/go/src/bitbucket.org/geneticentropy/mendel-go/mendel-defaults.ini ./src/spc_apps/mendel_go/mendel_go.toml

@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+'''
+This script installs the latest mendel-go-spc to EC2
+'''
+
+
+# Allow imports from the lib directory
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
+
+import lib.cmd.remote as cmd_remote
+import lib.ssh as ssh
+
+
+def main():
+    try:
+        connection = ssh.connect('ec2-user', 'ec2-52-43-51-28.us-west-2.compute.amazonaws.com')
+
+        cmd_remote.run(connection, spc('uninstall mendel_go'))
+        cmd_remote.run(connection, spc('install https://bitbucket.org/geneticentropy/mendel-go-spc/get/master.zip'))
+        cmd_remote.run(connection, 'ln -s /home/ec2-user/go/src/bitbucket.org/geneticentropy/mendel-go/mendel-go /home/ec2-user/spc/src/spc_apps/mendel_go/mendel_go')
+        cmd_remote.run(connection, 'ln -s /home/ec2-user/go/src/bitbucket.org/geneticentropy/mendel-go/mendel-defaults.ini /home/ec2-user/spc/src/spc_apps/mendel_go/mendel_go.toml')
+        cmd_remote.run(connection, 'sudo initctl restart spc')
+    finally:
+        if connection:
+            connection.close()
+
+
+def spc(command):
+    return 'cd /home/ec2-user/spc; /home/ec2-user/spc/spc {}'.format(command)
+
+
+main()
