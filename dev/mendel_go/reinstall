@@ -1,16 +1,25 @@
 #!/bin/bash
 
-cd /Volumes/HardDrive/libraries/go/src/bitbucket.org/geneticentropy
+# Reinstall mendel-go-spc into the locally running spc.
+
+# These env vars can be overridden when calling this script:
+SPC_DIR="${SPC_DIR:-$GOPATH/src/github.com/jpotterm/spc}" 		# the canonical location is $GOPATH/src/github.com/whbrewer/spc
+
+cd $GOPATH/src/bitbucket.org/geneticentropy
 zip mendel-go-spc.zip \
     mendel-go-spc \
     mendel-go-spc/*
 
-cd /Volumes/HardDrive/libraries/go/src/github.com/jpotterm/spc/
+cd $SPC_DIR
 
 ./spc uninstall mendel_go
-./spc install /Volumes/HardDrive/libraries/go/src/bitbucket.org/geneticentropy/mendel-go-spc.zip
+./spc install $GOPATH/src/bitbucket.org/geneticentropy/mendel-go-spc.zip
 
-rm /Volumes/HardDrive/libraries/go/src/bitbucket.org/geneticentropy/mendel-go-spc.zip
+rm $GOPATH/src/bitbucket.org/geneticentropy/mendel-go-spc.zip
 
-ln -s /Volumes/HardDrive/libraries/go/src/bitbucket.org/geneticentropy/mendel-go/mendel-go ./src/spc_apps/mendel_go/mendel_go
-ln -s /Volumes/HardDrive/libraries/go/src/bitbucket.org/geneticentropy/mendel-go/mendel-defaults.ini ./src/spc_apps/mendel_go/mendel_go.toml
+ln -s $GOPATH/src/bitbucket.org/geneticentropy/mendel-go/mendel-go ./src/spc_apps/mendel_go/mendel_go
+ln -s $GOPATH/src/bitbucket.org/geneticentropy/mendel-go/mendel-defaults.ini ./src/spc_apps/mendel_go/mendel_go.toml
+
+# Leave the caller where he was
+cd -
+cd -
