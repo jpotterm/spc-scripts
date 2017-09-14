@@ -16,13 +16,14 @@ import lib.ssh as ssh
 
 
 def main():
+    EC2_HOST = os.getenv("EC2_HOST", 'ec2-52-43-51-28.us-west-2.compute.amazonaws.com')
     try:
-        connection = ssh.connect('ec2-user', 'ec2-52-43-51-28.us-west-2.compute.amazonaws.com')
+        connection = ssh.connect('ec2-user', EC2_HOST)
 
         cmd_remote.run(connection, spc('uninstall mendel_go'))
         cmd_remote.run(connection, spc('install https://bitbucket.org/geneticentropy/mendel-go-spc/get/master.zip'))
-        cmd_remote.run(connection, 'ln -s /home/ec2-user/go/src/bitbucket.org/geneticentropy/mendel-go/mendel-go /home/ec2-user/spc/src/spc_apps/mendel_go/mendel_go')
-        cmd_remote.run(connection, 'ln -s /home/ec2-user/go/src/bitbucket.org/geneticentropy/mendel-go/mendel-defaults.ini /home/ec2-user/spc/src/spc_apps/mendel_go/mendel_go.toml')
+        cmd_remote.run(connection, 'ln -sf /home/ec2-user/go/src/bitbucket.org/geneticentropy/mendel-go/mendel-go /home/ec2-user/spc/src/spc_apps/mendel_go/mendel_go')
+        cmd_remote.run(connection, 'ln -sf /home/ec2-user/go/src/bitbucket.org/geneticentropy/mendel-go/mendel-defaults.ini /home/ec2-user/spc/src/spc_apps/mendel_go/mendel_go.toml')
         cmd_remote.run(connection, 'sudo initctl restart spc')
     finally:
         if connection:
