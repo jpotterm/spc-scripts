@@ -16,9 +16,14 @@ import lib.ssh as ssh
 
 
 def main():
-    EC2_HOST = os.getenv("EC2_HOST", 'ec2-52-43-51-28.us-west-2.compute.amazonaws.com')
+    if len(sys.argv) != 2:
+        print('Usage: ./prod/mendel_go/reinstall hostname')
+        return
+
+    host = sys.argv[1]
+
     try:
-        connection = ssh.connect('ec2-user', EC2_HOST)
+        connection = ssh.connect('ec2-user', host)
 
         cmd_remote.run(connection, spc('uninstall mendel_go'))
         cmd_remote.run(connection, spc('install https://bitbucket.org/geneticentropy/mendel-go-spc/get/master.zip'))
