@@ -16,14 +16,15 @@ import lib.ssh as ssh
 
 
 def main():
-    if len(sys.argv) != 2:
-        print('Usage: ./prod/mendel_go/reinstall hostname')
+    if len(sys.argv) != 3:
+        print('Usage: ./prod/mendel_go/reinstall hostname port')
         return
 
     host = sys.argv[1]
+    port = int(sys.argv[2])
 
     try:
-        connection = ssh.connect('ec2-user', host)
+        connection = ssh.connect('ec2-user', host, port=port)
 
         cmd_remote.run(connection, spc('uninstall mendel_go'))
         cmd_remote.run(connection, spc('install https://bitbucket.org/geneticentropy/mendel-go-spc/get/master.zip'))
