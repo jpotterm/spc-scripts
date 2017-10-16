@@ -27,9 +27,9 @@ def main():
         connection = ssh.connect('ec2-user', host, port=port)
 
         cmd_remote.run(connection, spc('uninstall mendel_go'))
-        cmd_remote.run(connection, spc('install https://bitbucket.org/geneticentropy/mendel-go-spc/get/master.zip'))
-        cmd_remote.run(connection, 'ln -sf /home/ec2-user/go/src/bitbucket.org/geneticentropy/mendel-go/mendel-go /home/ec2-user/spc/src/spc_apps/mendel_go/mendel_go')
-        cmd_remote.run(connection, 'ln -sf /home/ec2-user/go/src/bitbucket.org/geneticentropy/mendel-go/mendel-defaults.ini /home/ec2-user/spc/src/spc_apps/mendel_go/mendel_go.toml')
+        cmd_remote.run(connection, spc('install https://github.com/genetic-algorithms/mendel-go-spc/archive/master.zip'))
+        cmd_remote.run(connection, 'ln -sf /home/ec2-user/go/src/github.com/genetic-algorithms/mendel-go/mendel-go /home/ec2-user/spc/src/spc_apps/mendel_go/mendel_go')
+        cmd_remote.run(connection, 'ln -sf /home/ec2-user/go/src/github.com/genetic-algorithms/mendel-go/mendel-defaults.ini /home/ec2-user/spc/src/spc_apps/mendel_go/mendel_go.toml')
         cmd_remote.run(connection, 'sudo initctl restart spc')
     finally:
         if connection:

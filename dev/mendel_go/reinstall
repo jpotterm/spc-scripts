@@ -6,7 +6,7 @@
 # The canonical location is $GOPATH/src/github.com/whbrewer/spc
 SPC_DIR="${SPC_DIR:-$GOPATH/src/github.com/jpotterm/spc}"
 
-cd "$GOPATH"/src/bitbucket.org/geneticentropy
+cd "$GOPATH"/src/github.com/genetic-algorithms
 zip mendel-go-spc.zip \
     mendel-go-spc \
     mendel-go-spc/*
@@ -14,9 +14,9 @@ zip mendel-go-spc.zip \
 cd "$SPC_DIR"
 
 ./spc uninstall mendel_go
-./spc install "$GOPATH"/src/bitbucket.org/geneticentropy/mendel-go-spc.zip
+./spc install "$GOPATH"/src/github.com/genetic-algorithms/mendel-go-spc.zip
 
-rm "$GOPATH"/src/bitbucket.org/geneticentropy/mendel-go-spc.zip
+rm "$GOPATH"/src/github.com/genetic-algorithms/mendel-go-spc.zip
 
-ln -s "$GOPATH"/src/bitbucket.org/geneticentropy/mendel-go/mendel-go ./src/spc_apps/mendel_go/mendel_go
-ln -s "$GOPATH"/src/bitbucket.org/geneticentropy/mendel-go/mendel-defaults.ini ./src/spc_apps/mendel_go/mendel_go.toml
+ln -s "$GOPATH"/src/github.com/genetic-algorithms/mendel-go/mendel-go ./src/spc_apps/mendel_go/mendel_go
+ln -s "$GOPATH"/src/github.com/genetic-algorithms/mendel-go/mendel-defaults.ini ./src/spc_apps/mendel_go/mendel_go.toml
