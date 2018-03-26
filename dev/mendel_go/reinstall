@@ -4,7 +4,7 @@
 
 # These env vars can be overridden when calling this script.
 # The canonical location is $GOPATH/src/github.com/whbrewer/spc
-SPC_DIR="${SPC_DIR:-$GOPATH/src/github.com/jpotterm/spc}"
+SPC_DIR="${SPC_DIR:-$GOPATH/src/github.com/genetic-algorithms/spc}"
 
 cd "$GOPATH"/src/github.com/genetic-algorithms
 zip -r mendel-go-spc.zip mendel-go-spc -x *.git*
