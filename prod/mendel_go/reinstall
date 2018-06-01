@@ -23,6 +23,7 @@ def main():
     host = sys.argv[1]
     port = int(sys.argv[2])
 
+    connection = None
     try:
         connection = ssh.connect('ec2-user', host, port=port)
 
